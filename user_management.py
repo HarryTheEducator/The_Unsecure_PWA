@@ -17,7 +17,8 @@ def insertUser(username, password, DoB):
 def retrieveUsers(username, password):
     con = sql.connect("database_files/database.db")
     cur = con.cursor()
-    cur.execute(f"SELECT * FROM users WHERE username = '{username}'")
+    query = "SELECT * FROM users WHERE username = ?"
+    cur.execute(query, (username,))
     if cur.fetchone() == None:
         con.close()
         return False
